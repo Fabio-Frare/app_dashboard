@@ -1,5 +1,5 @@
 $(document).ready( () => {
-
+     
 	$('#documentacao').on('click', () => {
        // $('#pagina').load('documentacao.html')
        $.get('documentacao.html', data => {
@@ -14,9 +14,9 @@ $(document).ready( () => {
        })
     })
 
-    $('#competencia').on('change', e => {
+    $('#competencia').on('change', e => {    
 
-     let competencia =  $(e.target).val()    
+     let competencia = $(e.target).val()  
           
      $.ajax({
           type: 'GET',
@@ -24,15 +24,16 @@ $(document).ready( () => {
           data: `competencia=${competencia}`,
           dataType: 'json',
           success: dados => {
+               //console.log(dados.TotalDespesas)
                $('#numeroVendas').html(dados.numeroVendas)
                $('#totalVendas').html(dados.totalVendas) 
+               $('#clientesAtivos').html(dados.totalClientesAtivos)
+               $('#clientesInativos').html(dados.totalClientesInativos)
+               //$('#totalDespesas').html(dados.TotalDespesas)
           },
           error: erro => { console.log(erro) }
      })
     }) 
-
-
-
 
 
 })
