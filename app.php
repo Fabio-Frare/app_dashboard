@@ -8,7 +8,7 @@ class Dashboard {
     public $totalVendas;
     public $totalClientesAtivos;
     public $totalClientesInativos;
-    //public $totalDespesas;
+    public $totalDespesas;
 
     public function __get($atributo) {
         return $this->$atributo;
@@ -106,7 +106,7 @@ class Bd {
         return $stmt->fetch(PDO::FETCH_OBJ)->total_clientes_inativos;
     }
    
-    /*
+    
     public function getTotalDespesas() {
         $query = '
         SELECT SUM(total) as total_despesas
@@ -119,14 +119,12 @@ class Bd {
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_OBJ)->total_despesas;
-    }*/
+    }
     
 }
 
 $dashboard = new Dashboard();
 $conexao   = new Conexao();
-
-//print_r($_GET['competencia']);
 
 $competencia = explode('-', $_GET['competencia']);
 $ano = $competencia[0];
@@ -142,11 +140,9 @@ $dashboard->__set('numeroVendas'         , $bd->getNumeroVendas());
 $dashboard->__set('totalVendas'          , $bd->getTotalVendas());
 $dashboard->__set('totalClientesAtivos'  , $bd->getTotalClientesAtivos());
 $dashboard->__set('totalClientesInativos', $bd->getTotalClientesInativos());
-//$dashboard->__set('totalDespesas'        , $bd->getTotalDespesas());
+$dashboard->__set('totalDespesas'        , $bd->getTotalDespesas());
 
 echo json_encode($dashboard);
-
-//print_r($dashboard);
 
 
 ?>
